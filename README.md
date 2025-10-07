@@ -79,16 +79,3 @@ npm test
 cd hr-app-backend
 mvnw test
 ```
-
-## 📝 License
-
-[Add your license information here]
-
-## 👥 Authors
-
-[Add author information here]
-
----
-
-**Built with ❤️ using React 19, Spring Boot, and Node.js 22**
-

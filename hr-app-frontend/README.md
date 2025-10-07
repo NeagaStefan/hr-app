@@ -467,15 +467,3 @@ Ensure the backend is running on `http://localhost:8080` before starting the fro
 
 ### CORS Errors
 The backend must be configured to allow requests from `http://localhost:3000`.
-
-## 📄 License
-
-[Add your license information here]
-
-## 👥 Authors
-
-[Add author information here]
-
----
-
-**Built with ❤️ using React 19 and Node.js 22**
