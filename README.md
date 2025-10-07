@@ -1,278 +1,481 @@
-# HR App
+# HR App Frontend
 
-A full-stack Human Resources Management System with a Java Spring Boot backend and a React frontend, featuring employee management, team organization, feedback collection, and absence request handling.
+A modern, responsive Human Resources Management System frontend built with React, providing an intuitive interface for employee management, team organization, feedback collection, and absence request handling.
+
+## 🚀 Technologies Used
+
+### Core Technologies
+- **React 19.2.0** - Latest stable version of React with modern features
+- **Node.js 22** - JavaScript runtime environment
+- **React Scripts 5.0.1** - Build tooling and development server
+
+### Key Dependencies
+- **React DOM 19.2.0** - React rendering for web applications
+- **jwt-decode 4.0.0** - JWT token parsing and validation
+- **Web Vitals 2.1.4** - Performance monitoring
+
+### Testing
+- **@testing-library/react 16.3.0** - React component testing utilities
+- **@testing-library/jest-dom 6.9.1** - Custom Jest matchers
+- **@testing-library/user-event 13.5.0** - User interaction simulation
+- **Jest** - JavaScript testing framework (included with React Scripts)
+
+### Build Tools
+- **Webpack** - Module bundler (included with React Scripts)
+- **Babel** - JavaScript compiler (included with React Scripts)
+- **ESLint** - Code linting and quality
 
 ## 📋 Prerequisites
-- **Java 21** or newer
-- **Maven 3.6+**
-- **Node.js 22** & npm
-- **Git** (for version control)
 
-## 🏗️ Project Structure
-- `hr-app-backend/`: Spring Boot REST API with JWT authentication
-- `hr-app-frontend/`: React 19 SPA with comprehensive testing
+Before running the application, ensure you have the following installed:
 
-## 🚀 Quick Start
+- **Node.js 22** or higher
+- **npm** (comes with Node.js) or **yarn**
+- **HR App Backend** running on `http://localhost:8080`
 
-### Backend Setup
-```bash
-cd hr-app-backend
-mvn clean install
-mvn spring-boot:run
+## 🏃 How to Run Locally
+
+### 1. Install Dependencies
+
+```cmd
+npm install
 ```
 
-The backend will start on `http://localhost:8080`
+### 2. Start the Development Server
 
-**Default Users:**
-- Admin: `admin` / `admin123`
-- Manager: `manager` / `manager123`
-- Employee: `employee` / `employee123`
-
-### Frontend Setup
-```bash
-cd hr-app-frontend
-npm install
+```cmd
 npm start
 ```
 
-The frontend will start on `http://localhost:3000` and automatically open in your browser.
+The application will automatically open in your browser at `http://localhost:3000`
 
-## 🔧 Technologies
+### 3. Build for Production
 
-### Backend
-- **Spring Boot 3.5.6** - Framework
-- **Spring Security** - Authentication & Authorization
-- **JWT** - Token-based authentication
-- **Spring Data JPA** - Data persistence
-- **H2 Database** - In-memory database
-- **Liquibase** - Database migrations
-- **Swagger/OpenAPI 3** - API documentation
-- **Lombok** - Code generation
-- **Hibernate Validator** - Input validation
+To create an optimized production build:
 
-### Frontend
-- **React 19.2.0** - UI library
-- **Context API** - State management
-- **Jest & React Testing Library** - Testing
-- **CSS3** - Styling
+```cmd
+npm run build
+```
 
-## 📚 API Documentation (Swagger)
+The build output will be in the `build/` directory.
 
-Access the interactive API documentation at: `http://localhost:8080/swagger-ui/index.html`
 
-### How to Test APIs with Swagger:
+## 🌐 Available Scripts
 
-1. **Login to get JWT token:**
-   - Navigate to `/api/auth/login` endpoint
-   - Click "Try it out"
-   - Enter credentials (e.g., `admin` / `admin123`)
-   - Click "Execute"
-   - **Copy the token** from the response
-
-2. **Authorize Swagger:**
-   - Click the **"Authorize"** button (🔓 lock icon) at the top right
-   - Paste your JWT token in the "Value" field
-   - Click "Authorize" then "Close"
-
-3. **Test Protected Endpoints:**
-   - All endpoints now include your JWT token automatically
-   - You'll see a closed lock icon (🔒) on authenticated endpoints
-
-## 🎯 Features
-
-### Employee Management
-- View and edit employee profiles
-- Create and manage employee records
-- Assign employees to teams
-- Track employee hierarchy
-
-### Team Management
-- Create and organize teams
-- Assign team managers
-- View team members
-- Manage team structure
-
-### Absence Requests
-- Submit time-off requests
-- Approve/reject absence requests (managers)
-- View absence history
-- Track team absences
-
-### Feedback System
-- Submit employee feedback
-- Anonymous feedback option
-- Feedback history
-- Manager feedback reviews
-
-### Security
-- JWT-based authentication
-- Role-based access control (ADMIN, MANAGER, EMPLOYEE)
-- Secure password encryption
-- Token expiration handling
+- `npm start` - Runs the app in development mode
+- `npm test` - Launches the test runner in interactive watch mode
+- `npm run build` - Builds the app for production
+- `npm run eject` - Ejects from Create React App (one-way operation)
 
 ## 🧪 Testing
 
-### Backend Tests
-```bash
-cd hr-app-backend
-mvn test
-```
+### Test Framework
+The application uses **Jest** and **React Testing Library** for comprehensive unit and integration testing. All tests follow best practices for React component and hook testing.
 
-### Frontend Tests
-```bash
-cd hr-app-frontend
+### Running Tests
+
+#### Run All Tests
+```cmd
 npm test
 ```
 
-Run with coverage:
-```bash
+#### Run Tests in Watch Mode
+```cmd
+npm test -- --watch
+```
+
+#### Run Tests with Coverage
+```cmd
 npm test -- --coverage
 ```
 
-See detailed testing documentation in `hr-app-frontend/README.md`
+#### Run Specific Test File
+```cmd
+npm test -- src/hooks/useNotification.test.js
+```
 
-## 🗄️ Database
+### Test Coverage
 
-The application uses an **H2 in-memory database** with sample data loaded on startup.
+The project maintains comprehensive test coverage across all layers:
 
-**H2 Console:** `http://localhost:8080/h2-console`
-- JDBC URL: `jdbc:h2:mem:hrdb`
-- Username: `sa`
-- Password: *(leave empty)*
+#### Component Tests
+- **AbsenceModal.test.js** - Absence request modal functionality
+- **AbsenceTab.test.js** - Absence request tab rendering and interactions
+- **EmployeeFormModal.test.js** - Employee creation/editing form validation
+- **FeedbackModal.test.js** - Feedback submission modal
+- **Header.test.js** - Navigation and header rendering
+- **HRDashboard.test.js** - Main dashboard integration
+- **Login.test.js** - Authentication flow
+- **MyTeamTab.test.js** - Team member view
+- **Notification.test.js** - Notification component rendering
+- **ProfileTab.test.js** - Employee profile view
+- **TabNavigation.test.js** - Tab switching functionality
+- **TeamFormModal.test.js** - Team creation/editing form
+- **TeamManagementTab.test.js** - Team administration interface
+
+#### Custom Hook Tests
+- **useAbsenceData.test.js** - Absence data fetching logic
+- **useAbsenceHandlers.test.js** - Absence CRUD operations
+- **useEmployeeForm.test.js** - Form state management and validation
+- **useFeedbackData.test.js** - Feedback data fetching
+- **useFeedbackHandlers.test.js** - Feedback operations
+- **useNotification.test.js** - Notification state and timer management
+- **useTeamData.test.js** - Team data fetching
+- **useTeamHandlers.test.js** - Team operations
+
+### Testing Strategy
+
+#### 1. **Component Testing**
+Components are tested for:
+- **Rendering** - Correct initial render with props
+- **User Interactions** - Click events, form submissions, input changes
+- **Conditional Rendering** - Different states (loading, error, success)
+- **Props Handling** - Correct behavior with different prop combinations
+- **Accessibility** - Proper ARIA labels and semantic HTML
+
+Example:
+```javascript
+it('should render login form', () => {
+    render(<Login />);
+    expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+});
+```
+
+#### 2. **Custom Hook Testing**
+Hooks are tested using `@testing-library/react-hooks`:
+- **State Management** - Correct state updates
+- **Side Effects** - API calls, timers, event listeners
+- **Return Values** - Proper function and state exposure
+- **Error Handling** - Graceful error scenarios
+- **Edge Cases** - Boundary conditions and edge cases
+
+Example:
+```javascript
+it('should update form data on input change', () => {
+    const { result } = renderHook(() => useEmployeeForm());
+    act(() => {
+        result.current.handleInputChange({
+            target: { name: 'firstName', value: 'John' }
+        });
+    });
+    expect(result.current.formData.firstName).toBe('John');
+});
+```
+
+#### 3. **Integration Testing**
+Key user flows are tested end-to-end:
+- Login → Dashboard navigation
+- Employee creation and editing
+- Team management workflows
+- Absence request submission and approval
+- Feedback submission
+
+#### 4. **Validation Testing**
+All form validations are thoroughly tested:
+- **Email Validation**
+  - Valid email format
+  - Invalid formats (missing @, missing domain, etc.)
+  - Domain extension length requirements
+  - Empty domain parts
+- **Required Fields** - Presence validation
+- **Data Types** - Numeric, date, text validations
+
+### Test Best Practices
+
+✅ **Do:**
+- Test user behavior, not implementation details
+- Use semantic queries (`getByRole`, `getByLabelText`)
+- Test accessibility features
+- Mock API calls and external dependencies
+- Test edge cases and error scenarios
+- Keep tests focused and isolated
+- Use descriptive test names
+
+❌ **Don't:**
+- Test internal component state directly
+- Rely on implementation details (class names, internal functions)
+- Write tests that are too broad or too narrow
+- Skip error case testing
+- Ignore accessibility testing
+
+### Mocking Strategy
+
+#### API Calls
+```javascript
+global.fetch = jest.fn(() =>
+    Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ data: 'mock data' })
+    })
+);
+```
+
+#### Timers
+```javascript
+jest.useFakeTimers();
+act(() => {
+    jest.advanceTimersByTime(3000);
+});
+jest.useRealTimers();
+```
+
+#### LocalStorage
+```javascript
+const mockLocalStorage = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    removeItem: jest.fn()
+};
+global.localStorage = mockLocalStorage;
+```
+
+### Continuous Integration
+
+Tests are designed to run in CI/CD pipelines:
+- Fast execution time
+- No external dependencies required
+- Deterministic results
+- Clear failure messages
+
+### Coverage Goals
+
+Target coverage metrics:
+- **Statements:** > 80%
+- **Branches:** > 75%
+- **Functions:** > 80%
+- **Lines:** > 80%
+
+### Debugging Tests
+
+For failing tests:
+```cmd
+npm test -- --verbose
+npm test -- --no-coverage
+```
+
+To debug a specific test:
+```javascript
+screen.debug(); // Prints current DOM
+console.log(result.current); // Inspect hook state
+```
+
+### Future Testing Enhancements
+
+Planned improvements:
+- E2E tests with Cypress or Playwright
+- Visual regression testing
+- Performance testing with Lighthouse CI
+- Accessibility automated testing with axe-core
+- Load testing for data-heavy operations
+
+## 🏗️ Architectural Decisions
+
+### 1. **Component-Based Architecture**
+The application follows a modular component-based structure:
+
+```
+src/
+├── components/       # Reusable UI components
+├── context/          # Global state management
+├── hooks/            # Custom React hooks
+└── styles/           # CSS styling
+```
+
+**Benefits**:
+- Reusability and maintainability
+- Clear separation of concerns
+- Easy to test individual components
+- Scalable architecture
+
+### 2. **Custom Hooks Pattern**
+Business logic is extracted into custom hooks for better code organization:
+
+- **useAbsenceData.js** - Absence request data fetching
+- **useAbsenceHandlers.js** - Absence request operations (create, approve, reject)
+- **useEmployeeForm.js** - Employee form state management
+- **useFeedbackData.js** - Feedback data fetching
+- **useFeedbackHandlers.js** - Feedback operations
+- **useNotification.js** - Notification state management
+- **useTeamData.js** - Team data fetching
+- **useTeamHandlers.js** - Team operations
+
+**Benefits**:
+- Separation of business logic from UI
+- Reusable logic across components
+- Easier testing and maintenance
+- Better code organization
+
+### 3. **Context API for Authentication**
+Using React Context API (`AuthContext.js`) for global authentication state:
+
+- **Centralized Auth State** - Single source of truth for authentication
+- **JWT Token Management** - Automatic token persistence in localStorage
+- **Token Validation** - Automatic expiration checking
+- **Protected Routes** - Conditional rendering based on auth state
+
+**Why not Redux?**
+- Application state is relatively simple
+- Context API is sufficient for this use case
+- Reduces bundle size and complexity
+- Native React solution
+
+### 4. **Component Organization**
+
+#### Core Components:
+- **Login.js** - Authentication interface
+- **HRDashboard.js** - Main application container
+- **Header.js** - Navigation and user info
+- **TabNavigation.js** - Tab switching interface
+
+#### Feature Components:
+- **ProfileTab.js** - Employee profile view
+- **TeamManagementTab.js** - Team administration
+- **MyTeamTab.js** - Team member view
+- **AbsenceTab.js** - Absence request management
+- **EmployeeFormModal.js** - Employee creation/editing
+- **TeamFormModal.js** - Team creation/editing
+- **FeedbackModal.js** - Feedback submission
+- **AbsenceModal.js** - Absence request creation
+- **Notification.js** - User feedback messages
+
+### 5. **State Management Strategy**
+- **Local State** - Component-specific state with `useState`
+- **Context State** - Authentication state shared globally
+- **Custom Hooks** - Shared business logic and data fetching
+- **Props** - Parent-child communication
+
+This layered approach provides the right balance between simplicity and scalability.
+
+### 6. **API Communication**
+- **RESTful API** - Communication with Spring Boot backend
+- **Fetch API** - Native browser API for HTTP requests
+- **JWT Authentication** - Bearer token in Authorization header
+- **Error Handling** - Centralized error handling with user-friendly notifications
+
+### 7. **Conditional Rendering Pattern**
+```javascript
+return auth ? <HRDashboard /> : <Login />;
+```
+
+Simple and effective approach for authentication-based routing without additional routing libraries.
+
+**Benefits**:
+- No need for react-router for this simple use case
+- Reduced bundle size
+- Clear authentication flow
+
+### 8. **CSS Modules Strategy**
+Separate CSS files for different views:
+- `HRDashboard.css` - Main dashboard styling
+- `Login.css` - Login page styling
+- `App.css` - Global styles
+
+Keeps styling organized and maintainable.
+
+### 9. **Performance Considerations**
+- **Code Splitting** - Automatic with React Scripts
+- **Web Vitals** - Performance monitoring built-in
+- **Production Builds** - Optimized and minified
+- **Lazy Loading** - Can be implemented for larger feature sets
 
 ## 📁 Project Structure
 
 ```
-hr-app/
-├── hr-app-backend/
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/org/example/hrappbackend/
-│   │   │   │   ├── config/           # Security & OpenAPI config
-│   │   │   │   ├── controller/       # REST controllers
-│   │   │   │   ├── dto/              # Data transfer objects
-│   │   │   │   ├── entity/           # JPA entities
-│   │   │   │   ├── repository/       # Data repositories
-│   │   │   │   ├── security/         # JWT & security
-│   │   │   │   └── service/          # Business logic
-│   │   │   └── resources/
-│   │   │       ├── application.properties
-│   │   │       └── db/changelog/     # Liquibase migrations
-│   │   └── test/                     # Unit & integration tests
-│   └── pom.xml
-│
-└── hr-app-frontend/
-    ├── src/
-    │   ├── components/               # React components
-    │   ├── context/                  # Auth context
-    │   ├── hooks/                    # Custom hooks
-    │   └── styles/                   # CSS files
-    ├── package.json
-    └── README.md                     # Detailed frontend docs
+hr-app-frontend/
+├── public/                    # Static assets
+│   ├── index.html            # HTML template
+│   ├── favicon.ico
+│   └── manifest.json
+├── src/
+│   ├── components/           # React components
+│   │   ├── AbsenceModal.js
+│   │   ├── AbsenceTab.js
+│   │   ├── EmployeeFormModal.js
+│   │   ├── FeedbackModal.js
+│   │   ├── Header.js
+│   │   ├── HRDashboard.js
+│   │   ├── Login.js
+│   │   ├── MyTeamTab.js
+│   │   ├── Notification.js
+│   │   ├── ProfileTab.js
+│   │   ├── TabNavigation.js
+│   │   ├── TeamFormModal.js
+│   │   └── TeamManagementTab.js
+│   ├── context/              # Context providers
+│   │   └── AuthContext.js    # Authentication context
+│   ├── hooks/                # Custom React hooks
+│   │   ├── useAbsenceData.js
+│   │   ├── useAbsenceHandlers.js
+│   │   ├── useEmployeeForm.js
+│   │   ├── useFeedbackData.js
+│   │   ├── useFeedbackHandlers.js
+│   │   ├── useNotification.js
+│   │   ├── useTeamData.js
+│   │   └── useTeamHandlers.js
+│   ├── styles/               # CSS files
+│   │   ├── HRDashboard.css
+│   │   └── Login.css
+│   ├── App.js               # Root component
+│   ├── App.css              # Global styles
+│   ├── index.js             # Application entry point
+│   └── setupTests.js        # Test configuration
+├── build/                    # Production build output
+├── package.json             # Dependencies and scripts
+└── README.md               # This file
 ```
 
-## 🔐 Security Configuration
+## 🔧 Configuration
 
-### CORS
-The backend is configured to accept requests from `http://localhost:3000`.
+### Backend API URL
+The frontend connects to the backend at `http://localhost:8080`. If your backend runs on a different port, update the API calls in:
+- `src/context/AuthContext.js`
+- Custom hooks in `src/hooks/`
 
-For production, update `SecurityConfig.java`:
-```java
-configuration.setAllowedOrigins(List.of("https://your-production-domain.com"));
-```
+## 🎨 Features
 
-### JWT Configuration
-JWT secret and expiration are configured in `application.properties`. 
+- **User Authentication** - Secure login with JWT tokens
+- **Employee Management** - View and manage employee information
+- **Team Management** - Create and organize teams
+- **Feedback System** - Submit and view employee feedback
+- **Absence Requests** - Request time off and manage approvals
+- **Role-Based Access** - Different views for managers and employees
+- **Responsive Design** - Works on desktop and mobile devices
+- **Real-time Notifications** - User feedback for all actions
 
-⚠️ **Important:** Change the JWT secret for production use!
+## 🔐 Security Notes
 
-## 🌐 API Endpoints
+⚠️ **Important for Production**:
+1. Use environment variables for API URLs
+2. Implement HTTPS for all API communication
+3. Add request/response interceptors for better error handling
+4. Implement token refresh mechanism
+5. Add CSRF protection if needed
+6. Sanitize user inputs
+7. Implement proper error boundaries
 
-### Authentication
-- `POST /api/auth/login` - Login and get JWT token
-
-### Employees
-- `GET /api/employees` - Get all employees
-- `GET /api/employees/me` - Get current user profile
-- `GET /api/employees/{id}` - Get employee by ID
-- `POST /api/employees` - Create employee (ADMIN only)
-- `PUT /api/employees/{id}` - Update employee
-- `DELETE /api/employees/{id}` - Delete employee (ADMIN only)
-
-### Teams
-- `GET /api/teams` - Get all teams
-- `GET /api/teams/{id}` - Get team by ID
-- `POST /api/teams` - Create team (ADMIN only)
-- `PUT /api/teams/{id}` - Update team
-- `DELETE /api/teams/{id}` - Delete team (ADMIN only)
-
-### Absences
-- `GET /api/absences` - Get all absences
-- `GET /api/absences/employee/{id}` - Get employee absences
-- `POST /api/absences` - Create absence request
-- `PUT /api/absences/{id}/approve` - Approve absence (MANAGER only)
-- `PUT /api/absences/{id}/reject` - Reject absence (MANAGER only)
-
-### Feedback
-- `GET /api/feedback` - Get all feedback
-- `GET /api/feedback/employee/{id}` - Get employee feedback
-- `POST /api/feedback` - Submit feedback
-
-## 🐛 Troubleshooting
+## 📝 Common Issues
 
 ### Port Already in Use
-**Backend (8080):**
-```bash
-# Windows
-netstat -ano | findstr :8080
-taskkill /PID <PID> /F
+If port 3000 is already in use:
+```cmd
+set PORT=3001 && npm start
 ```
 
-**Frontend (3000):**
-```bash
-# Set different port
-set PORT=3001
-npm start
-```
-
-### Database Issues
-If you encounter database errors, the H2 database will reset on restart (in-memory).
+### Backend Connection Issues
+Ensure the backend is running on `http://localhost:8080` before starting the frontend.
 
 ### CORS Errors
-Ensure the backend is running before starting the frontend.
-
-## 📝 Development Workflow
-
-1. **Start Backend:** `mvn spring-boot:run` (in hr-app-backend)
-2. **Start Frontend:** `npm start` (in hr-app-frontend)
-3. **Run Tests:** `mvn test` (backend) or `npm test` (frontend)
-4. **View API Docs:** `http://localhost:8080/swagger-ui/index.html`
-5. **Access App:** `http://localhost:3000`
-
-## 🚀 Deployment
-
-### Backend (JAR)
-```bash
-cd hr-app-backend
-mvn clean package
-java -jar target/hr-app-backend-0.0.1-SNAPSHOT.jar
-```
-
-### Frontend (Build)
-```bash
-cd hr-app-frontend
-npm run build
-# Deploy the build/ folder to your web server
-```
+The backend must be configured to allow requests from `http://localhost:3000`.
 
 ## 📄 License
 
 [Add your license information here]
 
-## 👥 Contributors
+## 👥 Authors
 
-[Add contributor information here]
+[Add author information here]
 
 ---
 
-**Built with ❤️ using Spring Boot 3 and React 19**
+**Built with ❤️ using React 19 and Node.js 22**
