@@ -23,37 +23,50 @@ export const useEmployeeForm = () => {
             const selectedTeamIds = Array.from(options)
                 .filter(option => option.selected)
                 .map(option => option.value);
-            setFormData({...formData, [name]: selectedTeamIds});
+            setFormData(prev => ({...prev, [name]: selectedTeamIds}));
         } else {
-            setFormData({...formData, [name]: value});
+            setFormData(prev => ({...prev, [name]: value}));
         }
 
         if (name === 'email') {
             if (value === '') {
                 setEmailError('');
             } else {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-                const hasValidFormat = emailRegex.test(value);
+                // Email validation logic
                 const parts = value.split('@');
-
                 if (parts.length !== 2) {
                     setEmailError('Invalid email format');
-                } else {
-                    const domain = parts[1];
-                    const domainParts = domain.split('.');
-
-                    if (!hasValidFormat) {
-                        setEmailError('Invalid email format');
-                    } else if (domainParts.length < 2) {
-                        setEmailError('Email must have a valid domain (e.g., example.com)');
-                    } else if (domainParts[domainParts.length - 1].length < 2) {
-                        setEmailError('Domain extension must be at least 2 characters');
-                    } else if (domainParts.some(part => part.length === 0)) {
-                        setEmailError('Invalid domain format');
-                    } else {
-                        setEmailError('');
-                    }
+                    return;
                 }
+                const local = parts[0];
+                const domain = parts[1];
+                if (!local || !domain) {
+                    setEmailError('Invalid email format');
+                    return;
+                }
+                if (domain.includes('..')) {
+                    setEmailError('Invalid domain format');
+                    return;
+                }
+                const domainParts = domain.split('.');
+                if (domainParts.length < 2) {
+                    setEmailError('Email must have a valid domain (e.g., example.com)');
+                    return;
+                }
+                if (domainParts.some(part => part === '')) {
+                    setEmailError('Invalid domain format');
+                    return;
+                }
+                const extension = domainParts[domainParts.length - 1];
+                if (extension.length < 2) {
+                    setEmailError('Domain extension must be at least 2 characters');
+                    return;
+                }
+                if (value.split('@').length !== 2) {
+                    setEmailError('Invalid email format');
+                    return;
+                }
+                setEmailError('');
             }
         }
     };
@@ -70,9 +83,9 @@ export const useEmployeeForm = () => {
             managerId: '',
             teamIds: []
         });
-        setError('');
         setEmailError('');
         setDuplicateEmailError(false);
+        setError('');
     };
 
     return {
@@ -88,4 +101,3 @@ export const useEmployeeForm = () => {
         resetForm
     };
 };
-

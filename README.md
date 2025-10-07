@@ -5,7 +5,7 @@ A modern, responsive Human Resources Management System frontend built with React
 ## 🚀 Technologies Used
 
 ### Core Technologies
-- **React 19.2.0** - Latest version of React with modern features
+- **React 19.2.0** - Latest stable version of React with modern features
 - **Node.js 22** - JavaScript runtime environment
 - **React Scripts 5.0.1** - Build tooling and development server
 
@@ -66,6 +66,208 @@ The build output will be in the `build/` directory.
 - `npm test` - Launches the test runner in interactive watch mode
 - `npm run build` - Builds the app for production
 - `npm run eject` - Ejects from Create React App (one-way operation)
+
+## 🧪 Testing
+
+### Test Framework
+The application uses **Jest** and **React Testing Library** for comprehensive unit and integration testing. All tests follow best practices for React component and hook testing.
+
+### Running Tests
+
+#### Run All Tests
+```cmd
+npm test
+```
+
+#### Run Tests in Watch Mode
+```cmd
+npm test -- --watch
+```
+
+#### Run Tests with Coverage
+```cmd
+npm test -- --coverage
+```
+
+#### Run Specific Test File
+```cmd
+npm test -- src/hooks/useNotification.test.js
+```
+
+### Test Coverage
+
+The project maintains comprehensive test coverage across all layers:
+
+#### Component Tests
+- **AbsenceModal.test.js** - Absence request modal functionality
+- **AbsenceTab.test.js** - Absence request tab rendering and interactions
+- **EmployeeFormModal.test.js** - Employee creation/editing form validation
+- **FeedbackModal.test.js** - Feedback submission modal
+- **Header.test.js** - Navigation and header rendering
+- **HRDashboard.test.js** - Main dashboard integration
+- **Login.test.js** - Authentication flow
+- **MyTeamTab.test.js** - Team member view
+- **Notification.test.js** - Notification component rendering
+- **ProfileTab.test.js** - Employee profile view
+- **TabNavigation.test.js** - Tab switching functionality
+- **TeamFormModal.test.js** - Team creation/editing form
+- **TeamManagementTab.test.js** - Team administration interface
+
+#### Custom Hook Tests
+- **useAbsenceData.test.js** - Absence data fetching logic
+- **useAbsenceHandlers.test.js** - Absence CRUD operations
+- **useEmployeeForm.test.js** - Form state management and validation
+- **useFeedbackData.test.js** - Feedback data fetching
+- **useFeedbackHandlers.test.js** - Feedback operations
+- **useNotification.test.js** - Notification state and timer management
+- **useTeamData.test.js** - Team data fetching
+- **useTeamHandlers.test.js** - Team operations
+
+### Testing Strategy
+
+#### 1. **Component Testing**
+Components are tested for:
+- **Rendering** - Correct initial render with props
+- **User Interactions** - Click events, form submissions, input changes
+- **Conditional Rendering** - Different states (loading, error, success)
+- **Props Handling** - Correct behavior with different prop combinations
+- **Accessibility** - Proper ARIA labels and semantic HTML
+
+Example:
+```javascript
+it('should render login form', () => {
+    render(<Login />);
+    expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+});
+```
+
+#### 2. **Custom Hook Testing**
+Hooks are tested using `@testing-library/react-hooks`:
+- **State Management** - Correct state updates
+- **Side Effects** - API calls, timers, event listeners
+- **Return Values** - Proper function and state exposure
+- **Error Handling** - Graceful error scenarios
+- **Edge Cases** - Boundary conditions and edge cases
+
+Example:
+```javascript
+it('should update form data on input change', () => {
+    const { result } = renderHook(() => useEmployeeForm());
+    act(() => {
+        result.current.handleInputChange({
+            target: { name: 'firstName', value: 'John' }
+        });
+    });
+    expect(result.current.formData.firstName).toBe('John');
+});
+```
+
+#### 3. **Integration Testing**
+Key user flows are tested end-to-end:
+- Login → Dashboard navigation
+- Employee creation and editing
+- Team management workflows
+- Absence request submission and approval
+- Feedback submission
+
+#### 4. **Validation Testing**
+All form validations are thoroughly tested:
+- **Email Validation**
+  - Valid email format
+  - Invalid formats (missing @, missing domain, etc.)
+  - Domain extension length requirements
+  - Empty domain parts
+- **Required Fields** - Presence validation
+- **Data Types** - Numeric, date, text validations
+
+### Test Best Practices
+
+✅ **Do:**
+- Test user behavior, not implementation details
+- Use semantic queries (`getByRole`, `getByLabelText`)
+- Test accessibility features
+- Mock API calls and external dependencies
+- Test edge cases and error scenarios
+- Keep tests focused and isolated
+- Use descriptive test names
+
+❌ **Don't:**
+- Test internal component state directly
+- Rely on implementation details (class names, internal functions)
+- Write tests that are too broad or too narrow
+- Skip error case testing
+- Ignore accessibility testing
+
+### Mocking Strategy
+
+#### API Calls
+```javascript
+global.fetch = jest.fn(() =>
+    Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ data: 'mock data' })
+    })
+);
+```
+
+#### Timers
+```javascript
+jest.useFakeTimers();
+act(() => {
+    jest.advanceTimersByTime(3000);
+});
+jest.useRealTimers();
+```
+
+#### LocalStorage
+```javascript
+const mockLocalStorage = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    removeItem: jest.fn()
+};
+global.localStorage = mockLocalStorage;
+```
+
+### Continuous Integration
+
+Tests are designed to run in CI/CD pipelines:
+- Fast execution time
+- No external dependencies required
+- Deterministic results
+- Clear failure messages
+
+### Coverage Goals
+
+Target coverage metrics:
+- **Statements:** > 80%
+- **Branches:** > 75%
+- **Functions:** > 80%
+- **Lines:** > 80%
+
+### Debugging Tests
+
+For failing tests:
+```cmd
+npm test -- --verbose
+npm test -- --no-coverage
+```
+
+To debug a specific test:
+```javascript
+screen.debug(); // Prints current DOM
+console.log(result.current); // Inspect hook state
+```
+
+### Future Testing Enhancements
+
+Planned improvements:
+- E2E tests with Cypress or Playwright
+- Visual regression testing
+- Performance testing with Lighthouse CI
+- Accessibility automated testing with axe-core
+- Load testing for data-heavy operations
 
 ## 🏗️ Architectural Decisions
 
@@ -277,4 +479,3 @@ The backend must be configured to allow requests from `http://localhost:3000`.
 ---
 
 **Built with ❤️ using React 19 and Node.js 22**
-

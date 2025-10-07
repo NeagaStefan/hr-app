@@ -1,12 +1,27 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 export const useNotification = () => {
     const [notification, setNotification] = useState({ message: '', type: '' });
+    const timerRef = useRef(null);
 
     const showNotification = (message, type) => {
         setNotification({ message, type });
-        setTimeout(() => setNotification({ message: '', type: '' }), 3000);
+        if (timerRef.current) {
+            clearTimeout(timerRef.current);
+        }
+        timerRef.current = setTimeout(() => {
+            setNotification({ message: '', type: '' });
+            timerRef.current = null;
+        }, 3000);
     };
+
+    useEffect(() => {
+        return () => {
+            if (timerRef.current) {
+                clearTimeout(timerRef.current);
+            }
+        };
+    }, []);
 
     return {
         notification,

@@ -25,7 +25,7 @@ export const useAbsenceHandlers = (getAuthHeaders, showNotification, fetchMyAbse
 
     const handleAbsenceInputChange = (e) => {
         const {name, value} = e.target;
-        setAbsenceFormData({...absenceFormData, [name]: value});
+        setAbsenceFormData(prevData => ({...prevData, [name]: value}));
     };
 
     const handleSubmitAbsenceRequest = async () => {
@@ -289,4 +289,3 @@ export const useEmployeeHandlers = (
         handleCancel
     };
 };
-
