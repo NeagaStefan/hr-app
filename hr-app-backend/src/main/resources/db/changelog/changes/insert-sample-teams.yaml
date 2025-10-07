@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-sample-teams
+      author: hr-app
+      changes:
+        # Create Development Team with Sarah Johnson as manager
+        - insert:
+            tableName: team
+            columns:
+              - column:
+                  name: id
+                  value: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
+              - column:
+                  name: name
+                  value: Development Team
+              - column:
+                  name: manager_id
+                  value: '22222222-2222-2222-2222-222222222222'
+
+        # Add manager to the team
+        - insert:
+            tableName: team_employees
+            columns:
+              - column:
+                  name: team_id
+                  value: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
+              - column:
+                  name: employee_id
+                  value: '22222222-2222-2222-2222-222222222222'
+
+        # Add employee 1 (Michael Brown) to the team
+        - insert:
+            tableName: team_employees
+            columns:
+              - column:
+                  name: team_id
+                  value: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
+              - column:
+                  name: employee_id
+                  value: '33333333-3333-3333-3333-333333333333'
+
+        # Add employee 2 (Emily Davis) to the team
+        - insert:
+            tableName: team_employees
+            columns:
+              - column:
+                  name: team_id
+                  value: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
+              - column:
+                  name: employee_id
+                  value: '44444444-4444-4444-4444-444444444444'

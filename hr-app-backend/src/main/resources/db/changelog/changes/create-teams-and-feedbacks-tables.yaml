@@ -1,0 +1,99 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-team-table
+      author: hr-app
+      changes:
+        - createTable:
+            tableName: team
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create-feedback-table
+      author: hr-app
+      changes:
+        - createTable:
+            tableName: feedback
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: from_employee_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: to_employee_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: feedback_text
+                  type: VARCHAR(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: timestamp
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: feedback
+            baseColumnNames: from_employee_id
+            constraintName: fk_feedback_from_employee
+            referencedTableName: employees
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: feedback
+            baseColumnNames: to_employee_id
+            constraintName: fk_feedback_to_employee
+            referencedTableName: employees
+            referencedColumnNames: id
+
+  - changeSet:
+      id: create-team-employees-table
+      author: hr-app
+      changes:
+        - createTable:
+            tableName: team_employees
+            columns:
+              - column:
+                  name: team_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: employee_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: team_employees
+            columnNames: team_id, employee_id
+            constraintName: pk_team_employees
+        - addForeignKeyConstraint:
+            baseTableName: team_employees
+            baseColumnNames: team_id
+            constraintName: fk_team_employees_team
+            referencedTableName: team
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: team_employees
+            baseColumnNames: employee_id
+            constraintName: fk_team_employees_employee
+            referencedTableName: employees
+            referencedColumnNames: id

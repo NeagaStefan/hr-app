@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-absence-requests-table
+      author: hr-app
+      changes:
+        - createTable:
+            tableName: absence_requests
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: employee_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reason
+                  type: VARCHAR(500)
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: approved_by_id
+                  type: UUID
+              - column:
+                  name: requested_at
+                  type: TIMESTAMP
+              - column:
+                  name: responded_at
+                  type: TIMESTAMP
+              - column:
+                  name: manager_comment
+                  type: VARCHAR(500)
+        - addForeignKeyConstraint:
+            baseTableName: absence_requests
+            baseColumnNames: employee_id
+            constraintName: fk_absence_employee
+            referencedTableName: employees
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: absence_requests
+            baseColumnNames: approved_by_id
+            constraintName: fk_absence_approver
+            referencedTableName: employees
+            referencedColumnNames: id
+

@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-employees-table
+      author: hr-system
+      changes:
+        - createTable:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: position
+                  type: VARCHAR(100)
+              - column:
+                  name: department
+                  type: VARCHAR(100)
+              - column:
+                  name: hire_date
+                  type: DATE
+              - column:
+                  name: salary
+                  type: DECIMAL(10,2)
+              - column:
+                  name: manager_id
+                  type: UUID
+        - addForeignKeyConstraint:
+            baseTableName: employees
+            baseColumnNames: manager_id
+            constraintName: fk_employee_manager
+            referencedTableName: employees
+            referencedColumnNames: id

@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-manager-to-teams
+      author: hr-system
+      changes:
+        - addColumn:
+            tableName: team
+            columns:
+              - column:
+                  name: manager_id
+                  type: uuid
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseTableName: team
+            baseColumnNames: manager_id
+            constraintName: fk_team_manager
+            referencedTableName: employees
+            referencedColumnNames: id
+
