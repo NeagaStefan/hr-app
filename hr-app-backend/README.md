@@ -5,7 +5,7 @@ A modern Human Resources Management System backend built with Spring Boot, provi
 ## 🚀 Technologies Used
 
 ### Core Technologies
-- **Java 21** - Latest LTS version with modern language features
+- **Java 21** - Latest LTS stable version with modern language features
 - **Spring Boot 3.5.6** - Framework for building production-ready applications
 - **Maven** - Dependency management and build tool
 
@@ -47,11 +47,12 @@ Before running the application, ensure you have the following installed:
    ```cmd
    git clone <repository-url>
    cd hr-app-backend
+   replace <token> in application.properties with provided HuggingFace API key
    ```
 
 2. **Run the application**:
    ```cmd
-   mvnw.cmd spring-boot:run
+   mvn.cmd spring-boot:run
    ```
 
 3. **Access the application**:
@@ -124,7 +125,7 @@ Database changelogs are organized in `src/main/resources/db/changelog/changes/`:
 - **Development Speed** - Quick setup with no external database required
 - **Testing** - Easy to reset and test with clean state
 - **Future Migration** - Easy to switch to PostgreSQL/MySQL by changing configuration
-- **Note**: For production, replace with a persistent database
+- **Note**: I used this because it is easy to set up and requires no additional installation.
 
 ### 5. **API Documentation with SpringDoc OpenAPI**
 - **Auto-generated Documentation** - Swagger UI for interactive API testing
@@ -182,17 +183,6 @@ spring.liquibase.enabled=true
 application.security.jwt.secret-key=<secret>
 application.security.jwt.expiration=86400000
 ```
-
-## 🔐 Security Notes
-
-⚠️ **Important for Production**:
-1. Move JWT secret key to environment variables
-2. Remove or secure HuggingFace API key from properties file
-3. Replace H2 with a production database (PostgreSQL, MySQL)
-4. Enable HTTPS/TLS
-5. Configure CORS properly for your frontend domain
-6. Implement rate limiting
-7. Add comprehensive logging and monitoring
 
 ## 🧪 Testing
 
